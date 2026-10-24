@@ -1,0 +1,37 @@
+﻿<Page x:Class="DoAnQuanLyThuChi.Pages.NganSachPage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      Title="Quản Lý Ngân Sách">
+
+    <Grid Margin="15">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <!-- Thanh bộ lọc Tháng / Năm và Nút thiết lập -->
+        <Border Grid.Row="0" Background="#F8F9FA" Padding="15" CornerRadius="8" Margin="0,0,0,15" HorizontalAlignment="Stretch">
+            <WrapPanel VerticalAlignment="Center">
+                <TextBlock Text="Tháng:" VerticalAlignment="Center" Margin="0,0,8,0" FontWeight="Bold"/>
+                <ComboBox x:Name="cboMonth" Width="80" Height="30" SelectionChanged="Filter_Changed" Margin="0,0,20,0"/>
+
+                <TextBlock Text="Năm:" VerticalAlignment="Center" Margin="0,0,8,0" FontWeight="Bold"/>
+                <ComboBox x:Name="cboYear" Width="100" Height="30" SelectionChanged="Filter_Changed" Margin="0,0,25,0"/>
+
+                <Button x:Name="btnSetLimit" Content="Thiết lập hạn mức" Height="30" Padding="15,0" Background="#0D6EFD" Foreground="White" FontWeight="Bold" Click="BtnSetLimit_Click"/>
+            </WrapPanel>
+        </Border>
+
+        <!-- Bảng hiển thị Ngân sách dãn tràn màn hình -->
+        <DataGrid Grid.Row="1" x:Name="dgBudget" AutoGenerateColumns="False" IsReadOnly="True" 
+                  HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="Mã DM" Binding="{Binding CategoryId}" Width="80"/>
+                <DataGridTextColumn Header="Tên Danh Mục" Binding="{Binding CategoryName}" Width="2*"/>
+                <DataGridTextColumn Header="Hạn Mức Chi" Binding="{Binding AmountLimit, StringFormat={}{0:N0} VNĐ}" Width="1.5*"/>
+                <DataGridTextColumn Header="Thực Tế Đã Chi" Binding="{Binding SpentAmount, StringFormat={}{0:N0} VNĐ}" Width="1.5*"/>
+                <DataGridTextColumn Header="Hạn Mức Còn Lại" Binding="{Binding RemainingAmount, StringFormat={}{0:N0} VNĐ}" Width="1.5*"/>
+            </DataGrid.Columns>
+        </DataGrid>
+    </Grid>
+</Page>
